@@ -1,0 +1,28 @@
+{
+    "name": "Newtab Extension",
+    "description": "Thay đổi giao diện Tab mới của bạn!",
+    "version": "1.0",
+    "manifest_version": 3,
+    "background": {
+        "service_worker": "./js/background.js"
+    },
+    "permissions": ["storage"],
+    "chrome_url_overrides" : {
+        "newtab": "./html/Newtab.html"
+    },
+    "action": {
+        "default_popup": "./html/popup.html",
+        "default_icon": {
+            "16": "./images/icon/icon_16.png",
+            "32": "./images/icon/icon_32.png",
+            "48": "./images/icon/icon_48.png",
+            "128": "./images/icon/icon_128.png"
+        }
+    },
+    "icons": {
+        "16": "./images/icon/icon_16.png",
+        "32": "./images/icon/icon_32.png",
+        "48": "./images/icon/icon_48.png",
+        "128": "./images/icon/icon_128.png"
+    }
+}
