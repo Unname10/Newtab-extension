@@ -1,7 +1,6 @@
-var images = ['bg-02.jpg', 'bg-03.jpg', 'bg-08.jpg', 'bg-10.jpg']
 function changeRandomImage(e) {
-    let i = Math.floor((Math.random() * images.length));
-    e.style.backgroundImage = `url("../images/bg/${images[i]}")`;
+    let i = Math.floor((Math.random() * 25));
+    e.style.backgroundImage = `url("../images/bg/${i}.png")`;
 }
 
 window.onload = function () {
@@ -29,4 +28,5 @@ window.onload = function () {
             bgElement2.classList.remove("fadeIn");
         }, 1500)
     }, 5000);
+    
 }
