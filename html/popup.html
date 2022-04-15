@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
         <link rel="stylesheet" href="../css/popup.css">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
-        <script src="../js/lib/font-awesome-95aa32ed28.js"></script>
         <script src="../js/popup.js"></script>
+        <script src="../js/lib/font-awesome-95aa32ed28.js"></script>
     </head>
     <body>
 <div>
   <!-- Tab items -->
   <div class="tabs">
     <div class="tab-item active">
-      <i class="tab-icon fas fa-images"></i>
-      Background
+      <i class="tab-icon fas fa-cog"></i>
+      Cài đặt
     </div>
     <div class="tab-item">
-      <i class="tab-icon fas fa-cog"></i>
-      Settings
+      <i class="tab-icon fas fa-images"></i>
+      Background Preview
     </div>
     <div class="line"></div>
   </div>
@@ -25,14 +24,35 @@
   <!-- Tab content -->
   <div class="tab-content">
     <div class="tab-pane active">
-      <h2>Newtab Backgrounds</h2>
-      <div class="images"></div>
+      <h2 class="title">Cài đặt</h2>
+      <ul class="settingslist">
+        <li class="items">
+            <p class="setting-items">Thời gian chuyển ảnh: </p>
+            <select name="time-change-bg" id="time-change-bg" class="property">
+              <option value="5" class="time-change-options">5 giây</option>
+              <option value="10" class="time-change-options">10 giây</option>
+              <option value="30" class="time-change-options">30 giây</option>
+              <option value="60" class="time-change-options">1 phút</option>
+              <option value="300" class="time-change-options">5 phút</option>
+              <option value="600" class="time-change-options">10 phút</option>
+              <option value="0">Đến khi chuyển tab mới</option>
+            </select>
+       	</li>
+        <li class="items">
+          <p class="setting-items">Thời gian chạy hiệu ứng: </p>
+          <div class="duration-change-bg property">
+            <input type="text" id="duration-change-bg">
+            <p class="duration-text">giây</p>
+          </div>
+        </li>
+      </ul>
     </div>
     <div class="tab-pane">
       <h4>Angular</h4>
       <p>Angular is an application design framework and development platform for creating efficient and sophisticated single-page apps.</p>
     </div>
   </div>
+  <footer class="warring">*Lưu ý: Thay đổi chỉ áp dụng ở tab mới tiếp theo</footer>
 </div>
     </body>
 </html>

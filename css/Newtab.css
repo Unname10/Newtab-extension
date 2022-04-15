@@ -1,3 +1,7 @@
+:root{
+    --animation-duration: 1.5s
+}
+
 *{
     box-sizing: border-box;
 }
@@ -24,7 +28,7 @@ body{
 
 .fadeIn{
     animation-name: changeImageAnimation;
-    animation-duration: 1.5s;
+    animation-duration: var(--animation-duration);
 }
 
 @keyframes changeImageAnimation{

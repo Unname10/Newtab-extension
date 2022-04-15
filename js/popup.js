@@ -3,7 +3,7 @@ window.onload = () => {
     var tabPanes = document.querySelectorAll(".tab-pane");
     var tabActive = document.querySelector(".active");
     var line = document.querySelector(".line");
-    
+     
     requestIdleCallback(function () {
         line.style.left = tabActive.offsetLeft + "px";
         line.style.width = tabActive.offsetWidth + "px";
@@ -23,9 +23,12 @@ window.onload = () => {
             pane.classList.add("active");
         };
     });
-    var img = document.createElement("img");
-    img.src = `../images/bg/1.png`
-    img.classList.add("imagesPreview")
-    document.querySelector(".images").appendChild(img)
 
+    var timeChangeBg = document.querySelector("#time-change-bg");
+    chrome.storage.sync.get(["timeChangeBg"], (data) => {
+        timeChangeBg.value = data.timeChangeBg
+    });  
+    timeChangeBg.onchange = () => {
+        chrome.storage.sync.set({"timeChangeBg":parseInt(timeChangeBg.value)});
+    }
 }

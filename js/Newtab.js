@@ -8,7 +8,7 @@ function twoDigitNumber(number) {
     return formattedNumber
 }
 
-window.onload = function () {
+async function changeBg(timeChangeBg) {
     var bgElement = document.querySelector("#bg");
     var bgElement2 = document.querySelector("#bg2");
 
@@ -18,24 +18,30 @@ window.onload = function () {
     setTimeout(() => {
         bgElement.classList.remove("fadeIn");
     }, 1500)
+    if (timeChangeBg !== 0) {
+        setInterval(() => {   
+                if (bgElement.style.display == "none"){
+                    bgElement.style.display = "block";
+                    bgElement2.style.display = "none";
+                    bgElement.classList.add("fadeIn");
+                    changeRandomImage(bgElement2);
+                } else{
+                    bgElement.style.display = "none";
+                    bgElement2.style.display = "block";
+                    bgElement2.classList.add("fadeIn");
+                    changeRandomImage(bgElement);
+                }
 
-    setInterval(() => {   
-        if (bgElement.style.display == "none"){
-            bgElement.style.display = "block";
-            bgElement2.style.display = "none";
-            bgElement.classList.add("fadeIn");
-            changeRandomImage(bgElement2);
-        } else{
-            bgElement.style.display = "none";
-            bgElement2.style.display = "block";
-            bgElement2.classList.add("fadeIn");
-            changeRandomImage(bgElement);
-        }
-
-        setTimeout(() => {
-            bgElement.classList.remove("fadeIn");
-            bgElement2.classList.remove("fadeIn");
-        }, 1500)
-    }, 5000);
+                setTimeout(() => {
+                    bgElement.classList.remove("fadeIn");
+                    bgElement2.classList.remove("fadeIn");
+                }, 1500)
+        }, timeChangeBg);
+    }
     
+}
+window.onload = async function () {
+    var storageData = await chrome.storage.sync.get(["timeChangeBg"]);
+    var timeChangeBg = (storageData.timeChangeBg) * 1000;
+    changeBg(timeChangeBg);
 }
