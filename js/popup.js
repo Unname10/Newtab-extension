@@ -23,10 +23,9 @@ window.onload = () => {
             pane.classList.add("active");
         };
     });
+    var img = document.createElement("img");
+    img.src = `../images/bg/1.png`
+    img.classList.add("imagesPreview")
+    document.querySelector(".images").appendChild(img)
 
-    var uploadButton = document.querySelector(".upload");
-    var imgElement = document.querySelector("#image")
-    uploadButton.onchange = function () {
-        var file = uploadButton.files[0];
-    }
 }
