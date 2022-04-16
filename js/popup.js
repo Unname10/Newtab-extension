@@ -1,4 +1,4 @@
-window.onload = () => {
+window.onload = async function() {
     var tabItems = document.querySelectorAll(".tab-item");
     var tabPanes = document.querySelectorAll(".tab-pane");
     var tabActive = document.querySelector(".active");
@@ -24,11 +24,19 @@ window.onload = () => {
         };
     });
 
+    //Thời gian chuyển ảnh
+    var storageData = await chrome.storage.sync.get();
+
     var timeChangeBg = document.querySelector("#time-change-bg");
-    chrome.storage.sync.get(["timeChangeBg"], (data) => {
-        timeChangeBg.value = data.timeChangeBg
-    });  
+    timeChangeBg.value = storageData.timeChangeBg;
+
+    var animationDuration = document.querySelector("#animation-duration-bg");
+    animationDuration.value = storageData.animationDuration;
+
     timeChangeBg.onchange = () => {
-        chrome.storage.sync.set({"timeChangeBg":parseInt(timeChangeBg.value)});
+        chrome.storage.sync.set({"timeChangeBg": parseInt(timeChangeBg.value)});
+    };
+    animationDuration.onchange = () => {
+        chrome.storage.sync.set({"animationDuration": animationDuration.value});
     }
-}
+};

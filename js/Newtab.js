@@ -41,7 +41,9 @@ async function changeBg(timeChangeBg) {
     
 }
 window.onload = async function () {
-    var storageData = await chrome.storage.sync.get(["timeChangeBg"]);
+    var storageData = await chrome.storage.sync.get();
     var timeChangeBg = (storageData.timeChangeBg) * 1000;
     changeBg(timeChangeBg);
+    var varNewTabCss = document.querySelector(":root");
+    varNewTabCss.style.setProperty("--animation-duration", `${storageData.animationDuration}s`);
 }
