@@ -1,49 +1,52 @@
-function changeRandomImage(e) {
+// Function
+function changeRandomImage(element) {
     let i = Math.floor((Math.random() * 24))+1;
-    e.style.backgroundImage = `url("../images/bg/${twoDigitNumber(i)}.png")`;
+    element.style.backgroundImage = `url("../images/bg/${twoDigitNumber(i)}.png")`;
 }
-
 function twoDigitNumber(number) {
     let formattedNumber = ("0" + number).slice(-2);
     return formattedNumber
 }
+function changeBg(element1, element2, time) {
+    return setInterval(() => {   
+        if (element1.style.display == "none"){
+            element2.style.display = "none";
+            element1.style.display = "block";
+            element1.classList.add("fadeIn");
+            changeRandomImage(element2);
+        } else{
+            element1.style.display = "none";
+            element2.style.display = "block";
+            element2.classList.add("fadeIn");
+            changeRandomImage(element1);
+        }
+    }, time)
+}
 
-async function changeBg(timeChangeBg) {
+window.onload = async function () {
+    //Variable
+    var storageData = await chrome.storage.sync.get();
     var bgElement = document.querySelector("#bg");
     var bgElement2 = document.querySelector("#bg2");
+    var bgChangeTime = (storageData.bgChangeTime) * 1000;
 
+
+    //Execute
     changeRandomImage(bgElement);
     changeRandomImage(bgElement2);
 
-    setTimeout(() => {
-        bgElement.classList.remove("fadeIn");
-    }, 1500)
-    if (timeChangeBg !== 0) {
-        setInterval(() => {   
-                if (bgElement.style.display == "none"){
-                    bgElement.style.display = "block";
-                    bgElement2.style.display = "none";
-                    bgElement.classList.add("fadeIn");
-                    changeRandomImage(bgElement2);
-                } else{
-                    bgElement.style.display = "none";
-                    bgElement2.style.display = "block";
-                    bgElement2.classList.add("fadeIn");
-                    changeRandomImage(bgElement);
-                }
+    var autoChange = changeBg(bgElement, bgElement2, bgChangeTime);
 
-                setTimeout(() => {
-                    bgElement.classList.remove("fadeIn");
-                    bgElement2.classList.remove("fadeIn");
-                }, 1500)
-        }, timeChangeBg);
-    }
-    
-}
-window.onload = async function () {
-    var storageData = await chrome.storage.sync.get();
-    var timeChangeBg = (storageData.timeChangeBg) * 1000;
-    changeBg(timeChangeBg);
     var varNewTabCss = document.querySelector(":root");
     varNewTabCss.style.setProperty("--animation-duration", `${storageData.animationDuration}s`);
+
+    chrome.storage.onChanged.addListener((changes, namespace) => {
+        if (changes.bgChangeTime){
+            clearInterval(autoChange);
+            autoChange = changeBg(bgElement, bgElement2, changes.bgChangeTime.newValue * 1000);
+        }
+        if (changes.animationDuration){
+            varNewTabCss.style.setProperty("--animation-duration", `${changes.animationDuration.newValue}s`);
+        }
+    })
 }

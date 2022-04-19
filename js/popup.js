@@ -27,14 +27,14 @@ window.onload = async function() {
     //Thời gian chuyển ảnh
     var storageData = await chrome.storage.sync.get();
 
-    var timeChangeBg = document.querySelector("#time-change-bg");
-    timeChangeBg.value = storageData.timeChangeBg;
+    var bgChangeTime = document.querySelector("#bg-change-time");
+    bgChangeTime.value = storageData.bgChangeTime;
 
     var animationDuration = document.querySelector("#animation-duration-bg");
     animationDuration.value = storageData.animationDuration;
 
-    timeChangeBg.onchange = () => {
-        chrome.storage.sync.set({"timeChangeBg": parseInt(timeChangeBg.value)});
+    bgChangeTime.onchange = () => {
+        chrome.storage.sync.set({"bgChangeTime": parseInt(bgChangeTime.value)});
     };
     animationDuration.onchange = () => {
         chrome.storage.sync.set({"animationDuration": animationDuration.value});

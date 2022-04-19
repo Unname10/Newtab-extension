@@ -4,9 +4,13 @@
     "version": "1.0",
     "manifest_version": 3,
     "background": {
-        "service_worker": "./js/background.js"
+        "service_worker": "./js/background.js",
+        "matches": ["<all_urls>"]
     },
-    "permissions": ["storage"],
+    "permissions": [
+        "storage",
+        "tabs"
+    ],
     "chrome_url_overrides" : {
         "newtab": "./html/Newtab.html"
     },
