@@ -4,11 +4,62 @@
         <title>Tab mới</title>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="../css/Newtab.css">
+        <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
         <script type="module" src="../js/Newtab.js"></script>
         <script src="../js/lib/font-awesome-95aa32ed28.js"></script>
     </head>
     <body>
         <div id="bg" class="fadeIn"></div>
         <div id="bg2"></div>
+        <i class="fa-solid fa-angle-right open-sidebar"></i>
+        <div class="sidebar light">
+            <div class="header">
+                <i class="fa-solid fa-arrow-left"></i>
+                <div class="header-content">
+                    <i class='bx bxs-zap'></i>
+                    <span class="header-title">Truy cập nhanh</span>
+                </div>
+            </div>
+            <div class="body">
+                <div class="items recently">
+                    <div class="content-intro">
+                        <i class='bx bx-history icon-content'></i>
+                        <span class="text-content">Gần đây</span>
+                    </div>
+                    <i class="fa-solid fa-angle-right expand-content"></i>
+                </div>
+                <div class="items most-visited">
+                    <div class="content-intro">
+                        <i class='bx bx-heart icon-content'></i>
+                        <span class="text-content">Yêu thích</span>
+                    </div>
+                    <i class="fa-solid fa-angle-right expand-content"></i>
+                </div>
+                <div class="items bookmark">
+                    <div class="content-intro">
+                        <i class='bx bx-bookmark icon-content'></i>
+                        <span class="text-content">Bookmark</span>
+                    </div>
+                    <i class="fa-solid fa-angle-right expand-content"></i>
+                </div>
+                <div class="items setting">
+                    <div class="content-intro">
+                        <i class='bx bx-cog icon-content'></i>
+                        <span class="text-content">Cài đặt</span>
+                    </div>
+                    <i class="fa-solid fa-angle-right expand-content"></i>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="darkmode">
+                    <i class='bx bx-moon'></i>
+                    <span class="darkmode-text">Dark mode</span>
+                    <div class="button">
+                        <input type="checkbox" name="switch" id="switch">
+                        <label for="switch"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

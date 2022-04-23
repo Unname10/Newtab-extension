@@ -29,24 +29,33 @@ window.onload = async function () {
     var bgElement = document.querySelector("#bg");
     var bgElement2 = document.querySelector("#bg2");
     var bgChangeTime = (storageData.bgChangeTime) * 1000;
-
+    var darkmodeSwitch = document.querySelector("#switch");
 
     //Execute
     changeRandomImage(bgElement);
     changeRandomImage(bgElement2);
 
-    var autoChange = changeBg(bgElement, bgElement2, bgChangeTime);
+    if (bgChangeTime !== 0) {
+        var autoChange = changeBg(bgElement, bgElement2, bgChangeTime);
+    }
 
     var varNewTabCss = document.querySelector(":root");
     varNewTabCss.style.setProperty("--animation-duration", `${storageData.animationDuration}s`);
 
-    chrome.storage.onChanged.addListener((changes, namespace) => {
+    chrome.storage.onChanged.addListener((changes) => {
         if (changes.bgChangeTime){
-            clearInterval(autoChange);
+            if (changes.bgChangeTime.oldValue !== 0) {
+                clearInterval(autoChange);
+            }
             autoChange = changeBg(bgElement, bgElement2, changes.bgChangeTime.newValue * 1000);
         }
         if (changes.animationDuration){
             varNewTabCss.style.setProperty("--animation-duration", `${changes.animationDuration.newValue}s`);
         }
     })
+
+    darkmodeSwitch.onchange = () => {
+        var sidebar = document.querySelector(".sidebar");
+        sidebar.classList.toggle("dark")
+    }
 }
