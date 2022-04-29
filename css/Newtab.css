@@ -1,8 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@700&display=swap');
 
 :root{
-    --color-1: #ffffff;
+    /**Màu nền sidebar*/
+    --color-1: #ffffff; 
     --color-2: #141416;
+    /**Màu nền content*/
+    --color-3: #e6e6e6; 
+    --color-4: #000000;
 }
 
 *{
@@ -44,44 +48,52 @@ body{
 
 /* ---------------------Sidebar------------------- */
 .open-sidebar{
-    display: none;
     position: absolute;
     align-self: center;
     font-size: 50px;
-    margin: 10px;
+    left: 10px;
+    cursor: pointer;
+    color: var(--color-2);
 }
 
 .sidebar{    
     position: absolute;
-    width: 17%;
+    left: -20%;
+    width: 250px;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-content: center;
     z-index: 2;
     background-color: var(--color-1);
-    color: var(--color-2);
-    transition: background-color .2s linear, color .2s linear;
+    color: var(--color-4);
+    transition: background-color .2s linear, color .2s linear, left .5s ease-out;
 }
 
-.dark{
+.dark-sidebar{
     background-color: var(--color-2);
-    color: var(--color-1);
+    color: var(--color-3);
 }
 
 .fa-arrow-left{
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    font-size: 40px;
+    position: relative;
+    margin-top: 20px;
+    margin-left: 20px;
+    font-size: 45px;
+    cursor: pointer;
+}
+
+.dark-content{
+    color: var(--color-3);
 }
 
 .header{
+    position: absolute;
+    top: 80px;
+    margin: 0 auto;
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    height: 120px;
+    justify-content: center;
 }
 
 .header-content{
@@ -101,10 +113,12 @@ body{
 }
 
 .body{
-    margin-top: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: absolute;
+    top: 140px;
+    width: 100%;
 }
 
 
@@ -155,6 +169,7 @@ body{
 
 .bx-moon{
     font-size: 30px;
+    position: relative;
 }
 
 .button{
@@ -213,3 +228,20 @@ label:active:after {
     width: 25px;
 }
  
+@media only screen and (max-width: 1155px){
+    .header-title, .text-content, .expand-content::before, .darkmode-text, .button{
+        display: none;
+    }
+
+    .fa-arrow-left{
+        margin: 20px 0;
+        font-size: 35px;
+    }
+    .sidebar{
+        width: 70px;
+        align-items: center;
+    }
+    .items{
+        justify-content: center;
+    }
+}

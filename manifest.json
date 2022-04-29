@@ -4,9 +4,14 @@
     "version": "1.0",
     "manifest_version": 3,
     "background": {
-        "service_worker": "./js/background.js",
-        "matches": ["<all_urls>"]
+        "service_worker": "./js/background.js"
     },
+    "content_scripts": [
+        {
+          "matches": ["*://*/"],
+          "js": ["./js/foreground.js"]
+        }
+     ],
     "permissions": [
         "storage",
         "tabs"

@@ -24,12 +24,36 @@ function changeBg(element1, element2, time) {
 }
 
 window.onload = async function () {
+    //Local Function
+    function closeSidebar() {
+        sidebar.style.left = `-${sidebar.offsetWidth}px`;
+        for (let i of [bgElement, bgElement2]) {
+            i.removeEventListener("click", closeSidebar);
+        }
+    }
+
+    function openSidebar() {
+        sidebar.style.left = "0";
+        for (let i of [bgElement, bgElement2]) {
+            i.addEventListener("click", closeSidebar)
+        }
+    }
+
+    function switchMode() {
+        sidebar.classList.toggle("dark-sidebar")
+        openSidebarBtn.classList.toggle("dark-content");
+    }
+
     //Variable
     var storageData = await chrome.storage.sync.get();
     var bgElement = document.querySelector("#bg");
     var bgElement2 = document.querySelector("#bg2");
     var bgChangeTime = (storageData.bgChangeTime) * 1000;
+    var sidebar = document.querySelector(".sidebar");
     var darkmodeSwitch = document.querySelector("#switch");
+    var openSidebarBtn = document.querySelector(".open-sidebar");
+    var closeSidebarBtn = document.querySelector(".fa-arrow-left");
+    var recentElement = document.querySelector(".recently");
 
     //Execute
     changeRandomImage(bgElement);
@@ -54,8 +78,21 @@ window.onload = async function () {
         }
     })
 
-    darkmodeSwitch.onchange = () => {
-        var sidebar = document.querySelector(".sidebar");
-        sidebar.classList.toggle("dark")
+    if (storageData.darkMode) {
+        darkmodeSwitch.checked = true;
+        switchMode();
     }
+
+    openSidebarBtn.onclick = openSidebar;
+    closeSidebarBtn.onclick = closeSidebar;
+
+    darkmodeSwitch.onchange = () => {
+        switchMode();
+        chrome.storage.sync.set({"darkMode":darkmodeSwitch.checked})
+    }
+
+    // recentElement.onmouseenter = () => {
+        
+    // }
+
 }
