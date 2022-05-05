@@ -52,6 +52,78 @@
                         <span class="texts-intro">Cài đặt</span>
                     </div>
                     <i class="fa-solid fa-angle-right expand-content"></i>
+                    <div class="content setting-content">
+                        <div class="setting-options transImg">
+                            <div class="options">
+                                <span class="name-options">Trình chiếu:</span>
+                                <input type="checkbox" name="switch" class="switch" id="img-slide">
+                                <label for="img-slide" class="switch-button"></label>
+                            </div>
+                            <div class="child-options child-options__img">
+                                <div class="child-options__items">
+                                    <p class="child-name-options">Thời gian chuyển ảnh: </p>
+                                    <select name="img-slide-time" id="img-slide-time" class="options-value">
+                                        <option value="5">5 giây</option>
+                                        <option value="10">10 giây</option>
+                                        <option value="30">30 giây</option>
+                                        <option value="60">1 phút</option>
+                                        <option value="300">5 phút</option>
+                                        <option value="600">10 phút</option>
+                                    </select>
+                                </div>
+                                <div class="child-options__items">
+                                    <p class="child-name-options">Thời gian chạy hiệu ứng: </p>
+                                    <select name="effect-runtime" id="effect-runtime" class="options-value">
+                                        <option value="0.5">0.5 giây</option>
+                                        <option value="0.7">0.7 giây</option>
+                                        <option value="1">1 giây</option>
+                                        <option value="1.5">1.5 giây</option>
+                                        <option value="2">2 giây</option>
+                                        <option value="2.5">2.5 giây</option>
+                                        <option value="3">3 giây</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="setting-options clock">
+                            <div class="options">
+                                <span class="name-options">Đồng hồ:</span>
+                                <input type="checkbox" name="switch" class="switch" id="clock">
+                                <label for="clock" class="switch-button"></label>
+                            </div>
+                            <div class="child-options child-options__clock-format">
+                                <div class="child-options__items">
+                                    <p class="child-name-options">Định dạng thời gian: </p>
+                                    <select name="time-format" id="time-format" class="options-value">
+                                        <option value="24h">24 Giờ</option>
+                                        <option value="12h">12 Giờ</option>
+                                    </select>
+                                </div>
+                                <div class="child-options__items">
+                                    <p class="child-name-options">Định dạng ngày tháng: </p>
+                                    <select name="date-format" id="date-format" class="options-value">
+                                        <option value="dd-mm-yyyy">Ngày-tháng-năm</option>
+                                        <option value="mm-dd-yyyy">Tháng-ngày-năm</option>
+                                        <option value="yyyy-mm-dd">Năm-tháng-ngày</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="setting-options recently-visibility">
+                            <div class="options">
+                                <span class="name-options">Gần đây: </span>
+                                <input type="checkbox" name="switch" class="switch" id="recently">
+                                <label for="recently" class="switch-button"></label>
+                            </div>
+                        </div>
+                        <div class="setting-options favorite-visibility">
+                            <div class="options">
+                                <span class="name-options">Yêu thích: </span>
+                                <input type="checkbox" name="switch" class="switch" id="favorite">
+                                <label for="favorite" class="switch-button"></label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="footer">
@@ -59,11 +131,12 @@
                     <i class='bx bx-moon'></i>
                     <span class="darkmode-text">Dark mode</span>
                     <div class="button">
-                        <input type="checkbox" name="switch" id="switch">
-                        <label for="switch" id="switch-button"></label>
+                        <input type="checkbox" name="switch" class="switch" id="darkMode">
+                        <label for="darkMode" class="switch-button"></label>
                     </div>
                 </div>
             </div>
         </div>
+
     </body>
 </html>

@@ -16,11 +16,6 @@
     /* Màu khi hover content */
     --color-9: #e0e0e0b5;
     --color-10: #444444b5;
-    /* Màu input */
-    /* $primary: ;
-$secondary: ;
-$white: #fff;
-$gray: #9b9b9b;  */
     --primary: #11998e;
     --secondary: #38ef7d;
 }
@@ -201,13 +196,15 @@ body{
     margin: 0 15px;
 }
 
-input[type="checkbox"] {
+
+/* Checkbox */
+.switch {
     width: 0;
     height: 0;
     visibility: hidden;
 }
 
-#switch-button {
+.switch-button {
     display: block;
     width: 50px;
     height: 25px;
@@ -220,7 +217,7 @@ input[type="checkbox"] {
 }
 
 
-#switch-button::after {
+.switch-button::after {
     content: "";
     width: 20px;
     height: 20px;
@@ -232,20 +229,20 @@ input[type="checkbox"] {
     left: 5px;
 }
 
-input:checked + #switch-button:after {
-    left: calc(100% - 5px);
-    transform: translateX(-100%);
+.switch:checked + .switch-button:after {
+    transform: translateX(20px);
     background-color: var(--color-2)
 }  
 
-input:checked + #switch-button {
+.switch:checked + .switch-button {
     background-color: var(--color-1);
 }
 
-#switch-button:active:after {
+.switch-button:active:after {
     width: 25px;
 }
- 
+
+/* Responsive Newtab */
 @media only screen and (max-width: 1155px){
     .header-title, .texts-intro, .expand-content::before, .darkmode-text, .button{
         display: none;
@@ -420,7 +417,59 @@ input:checked + #switch-button {
     color: #11998e;
     font-weight: 700;
 }
-/* reset input */
+
 .form__field:required, .form__field:invalid {
     box-shadow: none;
+}
+
+.setting-content{
+    flex-direction: column;
+}
+
+.setting-options{
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+}
+
+.options{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* padding: 7px 0; */
+}
+
+.name-options{
+    font-size: 17px;
+}
+
+.child-options{
+    padding: 5px 10px 0 10px;
+    display: none;
+    flex-direction: column;
+}
+
+.child-options__items{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.child-name-options{
+    font-size: 13px;
+    min-width: 150px;
+    margin: 7px;
+}
+
+.options-value{
+    flex: 1;
+    height: 25px;
+    border: 0;
+    background-color: var(--color-1);
+    color: var(--color-4);
+}
+
+.dark-sidebar .options-value{
+    background-color: var(--color-2);
+    color: var(--color-3);
 }

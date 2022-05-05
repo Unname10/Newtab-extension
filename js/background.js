@@ -22,7 +22,13 @@ chrome.runtime.onInstalled.addListener(() => {
                 title: "Facebook",
                 url: "https://www.facebook.com/"
             }
-        ]
+        ],
+        setting: {
+            "imgSlide": true,
+            "clock": true,
+            "recentlyVisibility": true,
+            "favoriteVisibility": true
+        }
     });
 })
 

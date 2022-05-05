@@ -7,7 +7,7 @@ function twoDigitNumber(number) {
     let formattedNumber = ("0" + number).slice(-2);
     return formattedNumber
 }
-function changeBg(element1, element2, time) {
+function transitionBg(element1, element2, time) {
     return setInterval(() => {   
         if (element1.style.display == "none"){
             element2.style.display = "none";
@@ -83,23 +83,31 @@ window.onload = async function () {
     var bgElement2 = document.querySelector("#bg2");
     var bgChangeTime = (storageData.bgChangeTime) * 1000;
     var sidebar = document.querySelector(".sidebar");
-    var darkmodeSwitch = document.querySelector("#switch");
+    var darkmodeSwitch = document.querySelector("#darkMode");
     var openSidebarBtn = document.querySelector(".open-sidebar");
     var closeSidebarBtn = document.querySelector(".fa-arrow-left");
     var recentElement = document.querySelector(".recently");
-    var favoriteElement = document.querySelector(".favorite");
-    var bookmarkElement = document.querySelector(".bookmark");
     var recentContentElement = document.querySelector(".recent-content");
+    var favoriteElement = document.querySelector(".favorite");
     var favoriteContentElement = document.querySelector(".favorite-content");
+    var bookmarkElement = document.querySelector(".bookmark");
     var bookmarkContentElement = document.querySelector(".bookmark-content");
-    console.log(storageData)
+    var settingElement = document.querySelector(".setting");
+    var settingContentElement = document.querySelector(".setting-content");    
+    var imgSlide = document.querySelector("#img-slide");
+    var clock = document.querySelector("#clock");
+    var recentlyVisibility = document.querySelector("#recently");
+    var favoriteVisibility = document.querySelector("#favorite");
+    var imgSlideChildOptions = document.querySelector(".child-options__img");
+    var clockChildOptions = document.querySelector(".child-options__clock-format");
+
 
     //Execute
     changeRandomImage(bgElement);
     changeRandomImage(bgElement2);
 
     if (bgChangeTime !== 0) {
-        var autoChange = changeBg(bgElement, bgElement2, bgChangeTime);
+        var autoChange = transitionBg(bgElement, bgElement2, bgChangeTime);
     }
 
     var varNewTabCss = document.querySelector(":root");
@@ -110,7 +118,7 @@ window.onload = async function () {
             if (changes.bgChangeTime.oldValue !== 0) {
                 clearInterval(autoChange);
             }
-            autoChange = changeBg(bgElement, bgElement2, changes.bgChangeTime.newValue * 1000);
+            autoChange = transitionBg(bgElement, bgElement2, changes.bgChangeTime.newValue * 1000);
         }
         if (changes.animationDuration){
             varNewTabCss.style.setProperty("--animation-duration", `${changes.animationDuration.newValue}s`);
@@ -203,4 +211,36 @@ window.onload = async function () {
     favoriteElement.addEventListener("mouseleave", () => toggle(favoriteContentElement, false));
     bookmarkElement.addEventListener("mouseenter", () => toggle(bookmarkContentElement, true));
     bookmarkElement.addEventListener("mouseleave", () => toggle(bookmarkContentElement, false));
+    settingElement.addEventListener("mouseenter", () => toggle(settingContentElement, true));
+    settingElement.addEventListener("mouseleave", () => toggle(settingContentElement, false));
+
+    if (storageData.setting.imgSlide) {
+        imgSlide.checked = true;
+        toggle(imgSlideChildOptions, true);
+    };
+    if (storageData.setting.clock){ 
+        clock.checked = true;
+        toggle(clockChildOptions, true);
+    }
+    if (storageData.setting.recentlyVisibility) recentlyVisibility.checked = true;
+    if (storageData.setting.favoriteVisibility) favoriteVisibility.checked = true;
+
+    imgSlide.onchange = () => {
+        toggle(imgSlideChildOptions, imgSlide.checked);
+        storageData.setting.imgSlide = imgSlide.checked;
+        chrome.storage.sync.set({"setting":storageData.setting})
+    }
+    clock.onchange = () => {
+        toggle(clockChildOptions, clock.checked);
+        storageData.setting.clock = clock.checked;
+        chrome.storage.sync.set({"setting":storageData.setting})
+    }
+    recentlyVisibility.onchange = () => {
+        storageData.setting.recentlyVisibility = recentlyVisibility.checked;
+        chrome.storage.sync.set({"setting":storageData.setting})
+    }
+    favoriteVisibility.onchange = () => {
+        storageData.setting.favoriteVisibility = favoriteVisibility.checked;
+        chrome.storage.sync.set({"setting":storageData.setting})
+    }
 }
