@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="../css/Newtab.css">
         <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
         <script type="module" src="../js/Newtab.js"></script>
-        <script src="../js/lib/font-awesome-95aa32ed28.js"></script>
+        <script src="../js/module/font-awesome-95aa32ed28.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
@@ -53,6 +53,12 @@
                     </div>
                     <i class="fa-solid fa-angle-right expand-content"></i>
                     <div class="content setting-content">
+                        <div class="setting-options number-of-picture">
+                            <div class="form__group title-block">
+                                <input type="input" class="form__field" placeholder="number-of-picture" name="number-of-picture" id='number-of-picture' required />
+                                <label for="name" class="form__label">Số lượng hình ảnh:</label>
+                            </div>
+                        </div>
                         <div class="setting-options transImg">
                             <div class="options">
                                 <span class="name-options">Trình chiếu:</span>
@@ -63,12 +69,12 @@
                                 <div class="child-options__items">
                                     <p class="child-name-options">Thời gian chuyển ảnh: </p>
                                     <select name="img-slide-time" id="img-slide-time" class="options-value">
-                                        <option value="5">5 giây</option>
-                                        <option value="10">10 giây</option>
-                                        <option value="30">30 giây</option>
-                                        <option value="60">1 phút</option>
-                                        <option value="300">5 phút</option>
-                                        <option value="600">10 phút</option>
+                                        <option value="5000">5 giây</option>
+                                        <option value="10000">10 giây</option>
+                                        <option value="30000">30 giây</option>
+                                        <option value="60000">1 phút</option>
+                                        <option value="300000">5 phút</option>
+                                        <option value="600000">10 phút</option>
                                     </select>
                                 </div>
                                 <div class="child-options__items">

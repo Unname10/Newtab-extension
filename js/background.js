@@ -1,7 +1,5 @@
 chrome.runtime.onInstalled.addListener(() => {
     chrome.storage.sync.set({
-        "animationDuration": "1.5",
-        "bgChangeTime": 5,
         "darkMode": true,
         "recent": [],
         "favorite": [],
@@ -25,6 +23,8 @@ chrome.runtime.onInstalled.addListener(() => {
         ],
         setting: {
             "imgSlide": true,
+            "effectRuntime": "1.5",
+            "imgSlideTime": 5000,
             "clock": true,
             "recentlyVisibility": true,
             "favoriteVisibility": true

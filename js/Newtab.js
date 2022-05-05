@@ -19,6 +19,7 @@ function transitionBg(element1, element2, time) {
             element2.style.display = "block";
             element2.classList.add("fadeIn");
             changeRandomImage(element1);
+
         }
     }, time)
 }
@@ -81,7 +82,6 @@ window.onload = async function () {
     var storageData = await chrome.storage.sync.get();
     var bgElement = document.querySelector("#bg");
     var bgElement2 = document.querySelector("#bg2");
-    var bgChangeTime = (storageData.bgChangeTime) * 1000;
     var sidebar = document.querySelector(".sidebar");
     var darkmodeSwitch = document.querySelector("#darkMode");
     var openSidebarBtn = document.querySelector(".open-sidebar");
@@ -100,30 +100,18 @@ window.onload = async function () {
     var favoriteVisibility = document.querySelector("#favorite");
     var imgSlideChildOptions = document.querySelector(".child-options__img");
     var clockChildOptions = document.querySelector(".child-options__clock-format");
+    var imgSlideTimeChange = document.querySelector("#img-slide-time");
+    var effectRuntimeChange = document.querySelector("#effect-runtime");
 
+
+    console.log(storageData.setting.effectRuntime)
 
     //Execute
     changeRandomImage(bgElement);
     changeRandomImage(bgElement2);
 
-    if (bgChangeTime !== 0) {
-        var autoChange = transitionBg(bgElement, bgElement2, bgChangeTime);
-    }
-
     var varNewTabCss = document.querySelector(":root");
-    varNewTabCss.style.setProperty("--animation-duration", `${storageData.animationDuration}s`);
-
-    chrome.storage.onChanged.addListener((changes) => {
-        if (changes.bgChangeTime){
-            if (changes.bgChangeTime.oldValue !== 0) {
-                clearInterval(autoChange);
-            }
-            autoChange = transitionBg(bgElement, bgElement2, changes.bgChangeTime.newValue * 1000);
-        }
-        if (changes.animationDuration){
-            varNewTabCss.style.setProperty("--animation-duration", `${changes.animationDuration.newValue}s`);
-        }
-    })
+    varNewTabCss.style.setProperty("--animation-duration", `${storageData.setting.effectRuntime}s`);
 
     if (storageData.darkMode) {
         darkmodeSwitch.checked = true;
@@ -148,12 +136,12 @@ window.onload = async function () {
                 <i class="fa-solid fa-plus"></i>
             </div>
             <div class="form__group url-block">
-                <input type="input" class="form__field" placeholder="Name" name="name" id='name' required />
-                <label for="name" class="form__label">URL trang Web:</label>
+                <input type="input" class="form__field" placeholder="URL" name="URL" id='URL' required />
+                <label for="URL" class="form__label">URL trang Web:</label>
             </div>
             <div class="form__group title-block">
-                <input type="input" class="form__field" placeholder="Name" name="name" id='name' required />
-                <label for="name" class="form__label">Tiêu đề:</label>
+                <input type="input" class="form__field" placeholder="title" name="title" id='title'/>
+                <label for="URL" class="form__label">Tiêu đề:</label>
             </div>
         </div>
         <div class="subs-content add-content">
@@ -217,30 +205,59 @@ window.onload = async function () {
     if (storageData.setting.imgSlide) {
         imgSlide.checked = true;
         toggle(imgSlideChildOptions, true);
-    };
+        var autoChange = transitionBg(bgElement, bgElement2, storageData.setting.imgSlideTime);
+        imgSlideTimeChange.value = storageData.setting.imgSlideTime;
+        effectRuntimeChange.vakue = storageData.setting.effectRuntime;
+    }
     if (storageData.setting.clock){ 
         clock.checked = true;
         toggle(clockChildOptions, true);
     }
     if (storageData.setting.recentlyVisibility) recentlyVisibility.checked = true;
+    else toggle(recentElement, false);
     if (storageData.setting.favoriteVisibility) favoriteVisibility.checked = true;
+    else toggle(favoriteElement, false);
 
     imgSlide.onchange = () => {
+        if (imgSlide.checked) var autoChange = transitionBg(bgElement, bgElement2, storageData.setting.imgSlideTime);
+        else clearInterval(autoChange);
         toggle(imgSlideChildOptions, imgSlide.checked);
         storageData.setting.imgSlide = imgSlide.checked;
         chrome.storage.sync.set({"setting":storageData.setting})
+        imgSlideTimeChange.value = storageData.setting.imgSlideTime;
+        effectRuntimeChange.vakue = storageData.setting.effectRuntime;
     }
+
+    imgSlideTimeChange.onchange = () => {
+        console.log(imgSlideTimeChange.value);
+        clearInterval(autoChange);
+        autoChange = transitionBg(bgElement, bgElement2, imgSlideTimeChange.value);
+        storageData.setting.imgSlideTime = parseInt(imgSlideTimeChange.value);
+        chrome.storage.sync.set({"setting": storageData.setting});
+    }
+    
+    effectRuntimeChange.onchange = () => {
+        console.log(effectRuntimeChange.value)
+        varNewTabCss.style.setProperty("--animation-duration", `${effectRuntimeChange.value}s`);
+        storageData.setting.effectRuntime = effectRuntimeChange.value;
+        chrome.storage.sync.set({"effectRuntime": storageData.setting});
+    }
+
     clock.onchange = () => {
         toggle(clockChildOptions, clock.checked);
         storageData.setting.clock = clock.checked;
         chrome.storage.sync.set({"setting":storageData.setting})
     }
+
     recentlyVisibility.onchange = () => {
         storageData.setting.recentlyVisibility = recentlyVisibility.checked;
         chrome.storage.sync.set({"setting":storageData.setting})
+        toggle(recentElement, recentlyVisibility.checked)
     }
+    
     favoriteVisibility.onchange = () => {
         storageData.setting.favoriteVisibility = favoriteVisibility.checked;
         chrome.storage.sync.set({"setting":storageData.setting})
+        toggle(favoriteElement, favoriteVisibility.checked)
     }
 }
