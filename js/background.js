@@ -22,6 +22,7 @@ chrome.runtime.onInstalled.addListener(() => {
             }
         ],
         setting: {
+            "numberOfPicture": 24,
             "imgSlide": true,
             "effectRuntime": "1.5",
             "imgSlideTime": 5000,

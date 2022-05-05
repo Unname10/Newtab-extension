@@ -55,8 +55,11 @@
                     <div class="content setting-content">
                         <div class="setting-options number-of-picture">
                             <div class="form__group title-block">
-                                <input type="input" class="form__field" placeholder="number-of-picture" name="number-of-picture" id='number-of-picture' required />
-                                <label for="name" class="form__label">Số lượng hình ảnh:</label>
+                                <div class="number-of-picture-input">
+                                    <input type="input" class="form__field" placeholder="number-of-picture" name="number-of-picture" id='number-of-picture' required />
+                                    <label for="number-of-picture" class="form__label">Số lượng hình ảnh:</label>
+                                </div>
+                                <i class='bx bxs-send'></i>
                             </div>
                         </div>
                         <div class="setting-options transImg">
@@ -91,11 +94,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="setting-options clock">
+                        <div class="setting-options clock-setting">
                             <div class="options">
                                 <span class="name-options">Đồng hồ:</span>
-                                <input type="checkbox" name="switch" class="switch" id="clock">
-                                <label for="clock" class="switch-button"></label>
+                                <input type="checkbox" name="switch" class="switch" id="clock-setting">
+                                <label for="clock-setting" class="switch-button"></label>
                             </div>
                             <div class="child-options child-options__clock-format">
                                 <div class="child-options__items">
@@ -134,7 +137,9 @@
             </div>
             <div class="footer">
                 <div class="darkmode">
-                    <i class='bx bx-moon'></i>
+                    <label for="darkMode">
+                        <i class='bx bx-moon' id="icon-mode"></i>
+                    </label>
                     <span class="darkmode-text">Dark mode</span>
                     <div class="button">
                         <input type="checkbox" name="switch" class="switch" id="darkMode">

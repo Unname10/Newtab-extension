@@ -180,7 +180,7 @@ body{
     align-items: center;
 }
 
-.bx-moon{
+.bx-moon, .bx-sun{
     font-size: 30px;
     position: relative;
 }
@@ -324,6 +324,7 @@ body{
     font-size: 20px;
 }
 
+
 .add-content{
     color: var(--color-4);
     cursor: pointer;
@@ -354,8 +355,14 @@ body{
     margin: 0;
 }
 
-.fa-plus{
+.icons-queue{
+    display: flex;
+    align-items: center;
+}
+
+.fa-plus, .fa-xmark{
     font-size: 20px;
+    margin: 0 5px;
 }
 
 .dialog-items{
@@ -430,6 +437,19 @@ body{
     display: flex;
     flex-direction: column;
     margin: 5px;
+}
+
+.title-block{
+    display: flex;
+}
+
+.number-of-picture-input{
+    flex: 1;
+}
+
+.bxs-send{
+    font-size: 25px;
+    cursor: pointer;
 }
 
 .options{

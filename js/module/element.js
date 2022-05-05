@@ -1,25 +1,25 @@
-export function changeRandomImage(element) {
+export function changeRandomImage(element, numberOfPicture) {
     let i = Math.floor((Math.random() * 24))+1;
     element.style.backgroundImage = `url("../images/bg/${("0" + i).slice(-2)}.png")`;
 }
 
-export function transitionBg(element1, element2, time) {
+export function transitionBg(element1, element2, time, numberOfPicture) {
     return setInterval(() => {   
         if (element1.style.display == "none"){
             element2.style.display = "none";
             element1.style.display = "block";
             element1.classList.add("fadeIn");
-            changeRandomImage(element2);
+            changeRandomImage(element2, numberOfPicture);
         } else{
             element1.style.display = "none";
             element2.style.display = "block";
             element2.classList.add("fadeIn");
-            changeRandomImage(element1);
+            changeRandomImage(element1, numberOfPicture);
         }
     }, time)
 }
 
-export function toggle(element, status, displayType) {
+export function toggle(element, status, displayType = "flex") {
     if (status) element.style.display = displayType;
     else element.style.display = "none";
 }
@@ -43,16 +43,16 @@ export function toggleClass(toggleClass, ...element) {
     element.forEach(value => value.classList.toggle(toggleClass))
 }
 
-export function closeSidebar(sidebarELement) {
+export function closeSidebar(sidebarELement, ...element) {
     sidebarELement.style.left = `-${sidebarELement.offsetWidth}px`;
-    for (let i of [bgElement, bgElement2]) {
-        i.removeEventListener("click", closeSidebar);
-    }
+    element.forEach(e => {
+        e.addEventListener("click", () => closeSidebar(sidebarELement));
+    })
 }
 
-export function openSidebar(sidebarELement) {
+export function openSidebar(sidebarELement, ...element) {
     sidebarELement.style.left = "0";
-    document.onclick = e => {
-        if (e.target !== sidebarELement) closeSidebar(sidebarELement)
-    }
+    element.forEach(e => {
+        e.addEventListener("click", () => {closeSidebar(sidebarELement)});
+    })
 }
