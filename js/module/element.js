@@ -28,14 +28,16 @@ export function addContent(element, storageData, onError) {
     if (storageData.length === 0){
         element.innerHTML = `<p class="alert-content">${onError}</p>`
     } else{
+        let content = "";
         for (let i of storageData){
-            element.innerHTML = `
+            content += `
                 <div class="subs-content">
                     <img class="icons-content" src="https://s2.googleusercontent.com/s2/favicons?domain_url=${i.url}">
                     <a class="texts-content" href="${i.url}">${i.title}</a>
                 </div>
             `
         }
+        element.innerHTML = content;
     }
 }
 

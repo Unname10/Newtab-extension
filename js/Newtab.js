@@ -7,8 +7,8 @@ window.onload = async function () {
     //Variables
     var storageData = await chrome.storage.sync.get();
     var darkMode = storageData.darkMode;
-    var recent = storageData.recent;
-    var favorite = storageData.favorite;
+    var recent = await chrome.history.search({text: '', maxResults: 10});
+    var favorite = (await chrome.topSites.get()).slice(0, 10);
     var bookmark = storageData.bookmark;
     var setting = storageData.setting;
     var sidebar = $(".sidebar");
@@ -268,5 +268,4 @@ window.onload = async function () {
         Module.toggleClass("dark-content",openSidebarBtn);
         chrome.storage.sync.set({"darkMode":darkmodeSwitch.checked})
     }
-
 }
