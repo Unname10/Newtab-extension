@@ -24,9 +24,12 @@ chrome.runtime.onInstalled.addListener(() => {
             "imgSlide": true,
             "effectRuntime": "1.5",
             "imgSlideTime": 5000,
-            "clock": true,
             "recentlyVisibility": true,
             "favoriteVisibility": true
         }
     });
 })
+
+chrome.action.onClicked.addListener(() => {
+    chrome.tabs.create({url: "chrome://newtab"});
+});

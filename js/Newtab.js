@@ -27,11 +27,9 @@ window.onload = async function () {
     var numberOfPicture = $("#number-of-picture");
     var submitNumberOfPicture = $(".bxs-send");
     var imgSlide = $("#img-slide");
-    var clockSetting = $("#clock-setting");
     var recentlyVisibility = $("#recently");
     var favoriteVisibility = $("#favorite");
     var imgSlideChildOptions = $(".child-options__img");
-    var clockChildOptions = $(".child-options__clock-format");
     var imgSlideTimeChange = $("#img-slide-time");
     var effectRuntimeChange = $("#effect-runtime");
     var darkmodeSwitch = $("#darkMode");
@@ -71,13 +69,6 @@ window.onload = async function () {
     } else{
         Module.toggleClass("bx-moon", iconMode);
         Module.toggleClass("bx-sun", iconMode);
-    }
-
-
-    // Kiểm tra xem có hiển thị đồng hồ không
-    if (storageData.setting.clockSetting){ 
-        clockSetting.checked = true;
-        Module.toggle(clockChildOptions, true);
     }
 
     // Kiểm tra hiển thị mục Gần đây
@@ -145,7 +136,6 @@ window.onload = async function () {
     var addDialog = $(".add-content-dialog");
     var addBtn = $(".fa-plus");
     var inputField = $$(".form__field");
-
 
     // Khởi tạo các sự kiện (events)
 
@@ -235,13 +225,6 @@ window.onload = async function () {
         chrome.storage.sync.set({"effectRuntime": setting});
     }
 
-    // Thay đổi hiện/ẩn đồng hồ
-    clockSetting.onchange = () => {
-        Module.toggle(clockChildOptions, clockSetting.checked);
-        // Cập nhật giá trị vào storage
-        setting.clockSetting = clockSetting.checked;
-        chrome.storage.sync.set({"setting":setting})
-    }
 
     // Thay đổi hiện/ẩn mục Gần đây
     recentlyVisibility.onchange = () => {

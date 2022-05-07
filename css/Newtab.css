@@ -67,6 +67,7 @@ body{
     text-shadow: 0 2px 3px black;
 }
 
+
 .sidebar{    
     position: absolute;
     left: -20%;
@@ -272,7 +273,7 @@ body{
 .content{
     position: absolute;
     left: 100%;
-    width: 370px;
+    width: 430px;
     padding: 10px;
     display: none;
     flex-direction: column-reverse;
@@ -445,6 +446,14 @@ body{
 
 .number-of-picture-input{
     flex: 1;
+}
+
+#number-of-picture{
+    color: var(--color-4);
+}
+
+.dark-sidebar #number-of-picture{
+    color: var(--color-3);
 }
 
 .bxs-send{

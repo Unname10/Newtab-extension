@@ -9,13 +9,13 @@
     "permissions": [
         "storage",
         "history",
-        "topSites"
+        "topSites",
+        "tabs"
     ],
     "chrome_url_overrides" : {
         "newtab": "./html/Newtab.html"
     },
     "action": {
-        "default_popup": "chrome://history",
         "default_icon": {
             "16": "./images/icon/icon_16.png",
             "32": "./images/icon/icon_32.png",
