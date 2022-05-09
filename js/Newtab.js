@@ -251,4 +251,8 @@ window.onload = async function () {
         Module.toggleClass("dark-content",openSidebarBtn);
         chrome.storage.sync.set({"darkMode":darkmodeSwitch.checked})
     }
+
+    // Thêm sự kiện xóa hộp thêm Bookmark
+    var xButton = $(".fa-xmark");
+    xButton.onclick = () => Module.toggle(addDialog, false); // Ẩn form
 }
